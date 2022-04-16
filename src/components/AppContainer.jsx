@@ -20,6 +20,10 @@ const Container = styled.div`
 
 function AppContainer(props) {
     const [tasks, setTasks]  = useState([]);
+    const [completed, setCompleted]  = useState([]);
+    const [active, setActive]  = useState([]);
+    const [isComplete, setCompleteStatus]  = useState(false);
+    const [isActive, setActiveStatus]  = useState(false);
     const [value, setValue]  = useState("");
 
     useEffect(()=>{
@@ -35,7 +39,13 @@ function AppContainer(props) {
 
     function handleSubmit(e){
         e.preventDefault();
-        setTasks([...tasks, {task:value, complete: false}]); 
+        if(value!=="" && value!==undefined && value !==null){
+            setTasks([...tasks, {task:value, complete: false}]);
+            setCompleteStatus(false)
+            setActiveStatus(false);
+            e.target.reset();
+        }
+        
     }
 
 
@@ -45,6 +55,8 @@ function AppContainer(props) {
 
     function handleDelete(id){
         const temp = tasks.filter((task,index)=>index!==id);
+        setCompleteStatus(false)
+        setActiveStatus(false);
         setTasks(temp);
     }
 
@@ -55,26 +67,54 @@ function AppContainer(props) {
             }
             return {...task}
         });
+        setCompleteStatus(false)
+        setActiveStatus(false);
         setTasks(temp);
     }
 
     function clearCompleted(){
         const temp = tasks.filter(task=>!task.complete);
-        setTasks(temp);    
+        setTasks(temp);
+    }
+    
+    function filterCompleted(){
+        const temp = tasks.filter(task=>task.complete);
+        setActive([]);
+        setCompleted(temp);
+        setCompleteStatus(true)
+        setActiveStatus(false);
+    }
+    
+    function filterAll(){
+        setCompleted([]);
+        setActive([]);
+        setCompleteStatus(false)
+        setActiveStatus(false);
+    }
+    
+    function filterActive(){
+        const temp = tasks.filter(task=>!task.complete);
+        setCompleted([]);
+        setActive(temp);
+        setCompleteStatus(false)
+        setActiveStatus(true);
     }
 
     return (
         <Container>
             <Header dark={props.dark} toggleDark={props.toggleDark}/>
             <Input handleSubmit={handleSubmit} handleChange={handleChange} dark={props.dark}/>
-            <TodoList tasks={tasks} 
+            <TodoList tasks={(!isComplete) ? (!isActive) ? tasks : active: completed}
             updateTasks={setTasks} 
             handleDelete={handleDelete} 
             dark={props.dark} 
             handleCheck={handleCheck}
-            clearCompleted={clearCompleted}/>
+            clearCompleted={clearCompleted}
+            filterCompleted={filterCompleted}
+            filterAll={filterAll}
+            filterActive={filterActive}/>
         </Container>
     )
 }
 
-export default AppContainer
+export default AppContainer;

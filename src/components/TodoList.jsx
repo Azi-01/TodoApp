@@ -67,6 +67,14 @@ const StyledDivMobile = styled(StyledDiv)`
         &:focus{
             color: hsl(220, 98%, 61%);
         }
+
+        &:hover:not(span){
+            color: hsl(220, 98%, 61%);
+        }
+    }
+
+    .active{
+            color: hsl(220, 98%, 61%);
     }
 
     @media only screen and (min-width:768px){
@@ -81,6 +89,20 @@ function TodoList(props) {
         const [reordereditem] = temp.splice(result.source.index, 1);
         temp.splice(result.destination.index, 0, reordereditem);
         props.updateTasks(temp);
+    }
+
+    function handleActive(e){
+        let parent = e.target.parentNode;
+        let sibling = parent.firstChild;
+        while(sibling){
+            if(sibling !== e.target){
+                sibling.classList.remove("active");
+            }
+            else{
+                sibling.classList.add("active");
+            }
+            sibling = sibling.nextSibling;
+        }
     }
 
   return (
@@ -110,16 +132,16 @@ function TodoList(props) {
     <StyledDiv dark={props.dark}>
         <span>{props.tasks.length} items left</span>
         <div className="filters">
-            <a href="#">All</a>
-            <a href="#">Active</a>
-            <a href="#">Completed</a>
+            <a className="active" href="#" onClick={(e)=>{handleActive(e); props.filterAll();}}>All</a>
+            <a href="#" onClick={(e)=>{handleActive(e); props.filterActive();}}>Active</a>
+            <a href="#" onClick={(e)=>{handleActive(e); props.filterCompleted();}}>Completed</a>
         </div>
         <a href="#" onClick={props.clearCompleted}>Clear Completed</a>
     </StyledDiv>
     <StyledDivMobile dark={props.dark}>
-            <a href="#">All</a>
-            <a href="#">Active</a>
-            <a href="#">Completed</a>
+        <a className="active" href="#" onClick={(e)=>{handleActive(e); props.filterAll();}}>All</a>
+        <a href="#" onClick={(e)=>{handleActive(e); props.filterActive();}}>Active</a>
+        <a href="#" onClick={(e)=>{handleActive(e); props.filterCompleted();}}>Completed</a>
     </StyledDivMobile>
     </DragDropContext>
   )
