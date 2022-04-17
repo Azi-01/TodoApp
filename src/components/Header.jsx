@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import moonIcon from '../../images/icon-moon.svg';
+import sunIcon from '../../images/icon-sun.svg';
 
 const StyledHeader = styled.div`
     display: flex;
@@ -26,7 +28,7 @@ function Header(props) {
     <StyledHeader>
         <h1>TODO</h1>
         <div onClick={props.toggleDark}>
-            {props.dark ? <img src="/src/images/icon-moon.svg" alt="dark mode" /> : <img src="/src/images/icon-sun.svg" alt="light mode" />}
+            {props.dark ? <img src={moonIcon} alt="dark mode" /> : <img src={sunIcon} alt="light mode" />}
         </div>
     </StyledHeader>
   )

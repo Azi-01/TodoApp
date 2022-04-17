@@ -1,4 +1,6 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import crossIcon from '../../images/icon-cross.svg';
+import checkIcon from '../../images/icon-check.svg';
 
 const StyledTodo = styled.div`
     list-style: none;
@@ -89,14 +91,14 @@ function Todo(props) {
     <div>
         <div className="circle" onClick={()=>props.handleCheck(props.id)}>
             <div complete={props.task.complete.toString()}>
-                {props.task.complete ? <img src="/src/images/icon-check.svg" alt="completed task check icon"/> : ""}
+                {props.task.complete ? <img src={checkIcon} alt="completed task check icon"/> : ""}
             </div>
         </div>
         <span>{props.task.task}</span>
     </div>
     
     <div className="image-wrapper" onClick={()=>props.handleDelete(props.id)}>
-        <img src="/src/images/icon-cross.svg" alt="delete icon" />
+        <img src={crossIcon} alt="delete icon" />
     </div>
     </StyledTodo>
   );
