@@ -22,10 +22,14 @@ const StyledDiv = styled.div`
     
     .outerdiv{
       background-color: ${props=> props.dark ? "hsl(235, 24%, 19%)" : "white"};
-      padding: 1.2rem;
+      padding: 1.212rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      border: none;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+
       
       .circle{
         border-radius: 50%;

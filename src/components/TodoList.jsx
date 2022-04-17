@@ -82,6 +82,13 @@ const StyledDivMobile = styled(StyledDiv)`
     }
 `
 
+const StyledP = styled.p`
+    color:  ${props=> props.dark ? "hsl(234, 39%, 85%)" : "hsl(235, 19%, 35%)"};
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5vh;
+`
+
 function TodoList(props) {
 
     function handleOnDragEnd(result){
@@ -143,6 +150,7 @@ function TodoList(props) {
         <a href="#" onClick={(e)=>{handleActive(e); props.filterActive();}}>Active</a>
         <a href="#" onClick={(e)=>{handleActive(e); props.filterCompleted();}}>Completed</a>
     </StyledDivMobile>
+    <StyledP>Drag and drop to reorder list</StyledP>
     </DragDropContext>
   )
 }
