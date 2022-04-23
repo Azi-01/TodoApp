@@ -117,7 +117,7 @@ function TodoList(props) {
     <Droppable droppableId="TodoList">
     {(provided) => (
         <StyledList {...provided.droppableProps} ref={provided.innerRef} dark={props.dark}>
-            {props.tasks.map((task,index)=>{
+            {props.tasks.slice().reverse().map((task,index)=>{
                 return (      
                     <Draggable key={index} draggableId={`${index}`} index={index}>
                         {(provided)=>(
@@ -127,7 +127,7 @@ function TodoList(props) {
                             handleDelete={props.handleDelete}
                             dark={props.dark}
                             handleCheck={props.handleCheck}
-                            id={index}/>
+                            id={props.tasks.indexOf(task)}/>
                         )}
                     </Draggable>      
                 );

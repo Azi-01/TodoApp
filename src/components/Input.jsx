@@ -6,23 +6,25 @@ const StyledInput = styled.input`
     padding-left: 0;
     outline: none;
     border: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     margin: 2rem 0;
     background-color: ${props=> props.dark ? "hsl(235, 24%, 19%)" : "white"};
     color:  ${props=> props.dark ? "hsl(234, 39%, 85%)" : "hsl(235, 19%, 35%)"};
     font-weight: 400;
     font-size: 18px;
+    text-indent: 3.5rem;
 `
 
 const StyledDiv = styled.div`
   form{
    display: flex;
    align-items: center;
+   position: relative;
     
     .outerdiv{
-      background-color: ${props=> props.dark ? "hsl(235, 24%, 19%)" : "white"};
-      padding: 1.212rem;
+      position: absolute;
+      background-color: transparent;
+      padding: 1.2rem;
       display: flex;
       justify-content: center;
       align-items: center;

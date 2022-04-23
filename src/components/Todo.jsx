@@ -31,10 +31,6 @@ const StyledTodo = styled.div`
         display: flex;
         align-items: center;
         width: 80%;
-        overflow-wrap: break-word;
-        flex-wrap: wrap;
-        word-wrap: break-word;
-        -ms-word-wrap: break-word;
         
         span{
             text-decoration: ${props => props.complete ? "line-through": ""};
