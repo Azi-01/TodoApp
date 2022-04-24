@@ -40,7 +40,7 @@ function AppContainer(props) {
     function handleSubmit(e){
         e.preventDefault();
         if(value!=="" && value!==undefined && value !==null){
-            setTasks([...tasks, {task:value, complete: false}]);
+            setTasks([{task:value, complete: false}, ...tasks]);
             setCompleteStatus(false)
             setActiveStatus(false);
             e.target.reset();
@@ -54,7 +54,7 @@ function AppContainer(props) {
     }
 
     function handleDelete(id){
-        const temp = tasks.filter((task,index)=>index!==id);
+        const temp = tasks.filter((task, index)=>index!==id);
         setCompleteStatus(false)
         setActiveStatus(false);
         setTasks(temp);

@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import crossIcon from '../../images/icon-cross.svg';
 import checkIcon from '../../images/icon-check.svg';
+import {motion} from 'framer-motion';
 
-const StyledTodo = styled.div`
+const StyledTodo = styled(motion.div)`
     list-style: none;
     border-radius: 5px;
     padding: 1.5rem 1.5rem;
@@ -75,10 +76,19 @@ const StyledTodo = styled.div`
         display: unset;
     }
 `
+const TodoVariants = {
+    hidden: {opacity:0},
+    visible: {opacity:1},
+    transition: {duration:0.4}
+}
 
 function Todo(props) {
   return (
     <StyledTodo
+    variants={TodoVariants}
+    initial="hidden"
+    animate="visible"
+    exit="hidden"
     {...props.provided.draggableProps} 
     {...props.provided.dragHandleProps}
     ref={props.innerref} 

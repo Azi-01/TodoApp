@@ -1,6 +1,7 @@
 import Todo from "./Todo";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { AnimatePresence } from "framer-motion";
 
 const StyledList = styled.ul`
     background-color: white;
@@ -117,7 +118,8 @@ function TodoList(props) {
     <Droppable droppableId="TodoList">
     {(provided) => (
         <StyledList {...provided.droppableProps} ref={provided.innerRef} dark={props.dark}>
-            {props.tasks.slice().reverse().map((task,index)=>{
+            <AnimatePresence>
+            {props.tasks.map((task,index)=>{
                 return (      
                     <Draggable key={index} draggableId={`${index}`} index={index}>
                         {(provided)=>(
@@ -127,11 +129,12 @@ function TodoList(props) {
                             handleDelete={props.handleDelete}
                             dark={props.dark}
                             handleCheck={props.handleCheck}
-                            id={props.tasks.indexOf(task)}/>
+                            id={index}/>
                         )}
                     </Draggable>      
                 );
             })}
+            </AnimatePresence>
         {provided.placeholder}
         </StyledList>
     )}
